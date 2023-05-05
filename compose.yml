@@ -1,0 +1,52 @@
+services:
+  db:
+    image: mysql:8.0
+    restart: "no"
+    volumes:
+      - db-data:/var/lib/mysql
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DB_NAME}
+      MYSQL_USER: ${MYSQL_USER} 
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD} 
+    ports:
+      - 3306:3306
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-u$$MYSQL_USER", "-p$$MYSQL_PASSWORD"]
+      interval: 5s
+      timeout: 5s
+      retries: 2
+    networks:
+      - back-tier
+
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    restart: "no" 
+    environment:
+      ENVIRONMENT: dev
+      WEB_CONCURRENCY: 1
+      CODE_RELOAD: true
+      DJANGO_SETTINGS_MODULE: config.settings
+    env_file:
+      - .env
+    volumes:
+      - ./:/app
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:80"
+    networks:
+      - front-tier
+      - back-tier
+
+volumes:
+  db-data: {}
+
+networks:
+  front-tier: {}
+  back-tier: {}

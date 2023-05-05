@@ -1,0 +1,16 @@
+<!-- templates/teacher_new.html -->
+{% extends 'webscripts/_base.html' %}
+
+
+{% block content %}
+<h2> Ανάρτηση αρχείου παρακολούθησης ύλης Γενικών Λυκείων </h2>
+<p style="color:red;background-color:pink;"> {{ error_string }} </p>
+<form  method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+      <div class="form-group"><br>
+        <input type="file" class="form-control" name="document" placeholder="Ανάρτηση αρχείου δεδομένων">
+        <small id="emailHelp" class="form-text text-muted">Παρακαλώ επιλέξτε το αρχείο δεδομένων κάνοντας αριστερό κλικ στο "Επιλογή αρχείου".</small>
+      </div>
+       <button type="submit" class="btn btn-primary"> Ανάρτηση Αρχείου </button>
+</form>
+{% endblock %}
