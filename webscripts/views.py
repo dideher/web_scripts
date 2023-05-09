@@ -18,13 +18,11 @@ class HomePageView(TemplateView):
     
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)
-        # print(self.request.META['HTTP_REFERER'])
-        # context['latest_articles'] = Article.objects.all()[:5]
-        # return context
-    # print(request.GET.referer)
+    #     # print(self.request.META['HTTP_REFERER'])
+    #     context['left_side_menu_entries'] = MyLeftSideMenu.objects.all()
+    #     return context
+    # # print(request.GET.referer)
     
-    
-
 
 def upload_curriculum_status_file(request):
     context = {'error_string': "",}

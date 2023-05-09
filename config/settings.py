@@ -13,6 +13,7 @@ import os
 from environs import Env
 from pathlib import Path
 from django.core.management.utils import get_random_secret_key
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -74,6 +75,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'markdown',
     # Local
     'accounts.apps.AccountsConfig',
     # "pages.apps.PagesConfig",
@@ -103,7 +105,8 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.static',
+                'django.contrib.messages.context_processors.messages'
             ],
         },
     },
@@ -184,7 +187,7 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 # config/settings.py
 
 # django-allauth config
-SITE_ID = 5
+SITE_ID = 1
 
 ACCOUNT_LOGOUT_REDIRECT = "home"
 AUTHENTICATION_BACKENDS = (
