@@ -6,5 +6,5 @@ from django.utils.translation import gettext_lazy as _
 import datetime
 
 class UploadFileForm(forms.Form):
-    title = forms.CharField(max_length=50)
-    file = forms.FileField()
+    #title = forms.CharField(max_length=50)
+    file = forms.FileField(label="Αρχείο παρακολούθησης ύλης Γενικών Λυκείων από το MySchool.")

@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from django.http import Http404, HttpResponse, FileResponse, HttpResponseRedirect
 from .models import MyMainMenu
 from .utilities import generate_curriculum_report
+from .forms import UploadFileForm
 # Create your views here.
 
 
@@ -25,12 +26,15 @@ class MyMainMenuView(ListView):
     
 
 def upload_curriculum_status_file(request):
-    context = {'error_string': "",}
     if request.method == 'POST':
-        # print('Method is post')
-        # print(request.FILES)
-        uploaded_file = request.FILES['document']
-        generate_curriculum_report(uploaded_file)
-        return FileResponse(open('./templates/webscripts/curriculum_report.xlsx', 'rb'), as_attachment=True, filename='Report.xlsx')
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            # Remove potentially existing deprecated versions of the output xlsx file. 
+            if os.path.exists("/tmp/curriculum_report.xlsx"):
+                os.remove("/tmp/curriculum_report.xlsx")
+            generate_curriculum_report(request.FILES['file']) 
+            return FileResponse(open('/tmp/curriculum_report.xlsx', 'rb'), as_attachment=True, filename='curriculum_report.xlsx')
     else:
-        return render(request, 'webscripts/upload_curriculum_status_file.html', context)
+        form = UploadFileForm()
+    context = {"form": form}
+    return render(request, 'webscripts/upload_curriculum_status_file.html', context)

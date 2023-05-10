@@ -1,6 +1,9 @@
 import os
 from openpyxl import load_workbook, Workbook #, utils
 
+class UnexpectedCurriculumFile(Exception):
+    pass
+
 def print_curriculum_item_status(row):
     # Column numbers of interest.
     page_number_colnum = 10
@@ -28,11 +31,14 @@ def print_curriculum_item_status(row):
     return(curriculum_item_status)
 
 def generate_curriculum_report(uploaded_file):
-    filename, file_extension = os.path.splitext(uploaded_file.name)
+    # filename, file_extension = os.path.splitext(uploaded_file.name)
     wb = load_workbook(filename = uploaded_file)
     ws = wb.active
+    if ws.title != "Sheet":
+        raise UnexpectedCurriculumFile("Παρακαλώ εισάγεται το αρχείο παρακολούθησης ύλης που παρέχει το MySchool.")
+        
     # wb_out = Workbook()
-    wb_out = load_workbook(filename = 'templates/webscripts/curriculum_report_template.xlsx')
+    wb_out = load_workbook(filename = './templates/webscripts/curriculum_report_template.xlsx')
     ws_out = wb_out.active
 
     number_of_entries_per_school = 25
@@ -153,4 +159,4 @@ def generate_curriculum_report(uploaded_file):
             r[0][0] = new_index
         new_index += 1
         ws_out.append(r[0])
-    wb_out.save('./templates/webscripts/curriculum_report.xlsx')
+    wb_out.save('/tmp/curriculum_report.xlsx')
