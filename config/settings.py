@@ -75,10 +75,10 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'markdown',
+    'markdownx',
     # Local
     'accounts.apps.AccountsConfig',
-    # "pages.apps.PagesConfig",
+    "webscripts.apps.WebscriptsConfig",
 ]
 
 MIDDLEWARE = [
