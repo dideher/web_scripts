@@ -30,7 +30,7 @@ print(BASE_DIR)
 # --- gstam ---
 env = Env()
 # In a production setting change .env.private with .env after initializing all fields in the .env file.
-env.read_env(recurse=False)
+env.read_env()
 SECRET_KEY = env('SECRET_KEY')
 DEVELOPMENT = env('DEVELOPMENT')
 

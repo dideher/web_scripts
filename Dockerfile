@@ -47,8 +47,8 @@ COPY . /app/
 ## Set workdir and call Django commands to makemigrations, migrate and collectstatic files.
 WORKDIR /app/
 # RUN python /app/manage.py makemigrations
-RUN python /app/manage.py migrate --noinput
-RUN python /app/manage.py collectstatic --noinput
+# RUN python /app/manage.py migrate --noinput
+# RUN python /app/manage.py collectstatic --noinput
 
 # RUN chmod +x /app/docker-files/entrypoint.sh  
 RUN chmod +x /app/docker-files/start.sh 
