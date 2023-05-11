@@ -53,7 +53,7 @@ RUN python /app/manage.py collectstatic --noinput
 # RUN chmod +x /app/docker-files/entrypoint.sh  
 RUN chmod +x /app/docker-files/start.sh 
 # start.sh expects as argurments the path to gunicorn_conf.py and the django application module.
-ENTRYPOINT ["sh", "/app/docker-files/start.sh", "/app/docker-files/gunicorn_conf.py", "django_project.wsgi"]
+ENTRYPOINT ["sh", "/app/docker-files/start.sh", "/app/docker-files/gunicorn_conf.py", "config.wsgi"]
 # Use with: docker run -ti app-web-1:latest  
 # at the command line.
 # CMD ["/bin/bash"] 
