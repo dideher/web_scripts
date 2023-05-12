@@ -1,6 +1,6 @@
 #! /usr/bin/env sh
-echo "${0}: running makemigrations."
-python /app/manage.py makemigrations
+# echo "${0}: running makemigrations."
+# python /app/manage.py makemigrations
 
 echo "${0}: running migrations."
 python /app/manage.py migrate --noinput
