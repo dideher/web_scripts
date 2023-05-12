@@ -1,7 +1,7 @@
 #! /usr/bin/env sh
 set -e
 
-Run prestart.sh if it exists.
+#Run prestart.sh if it exists.
 PRE_START_PATH=./docker-files/prestart.sh
 echo "Checking for script in $PRE_START_PATH"
 if [ -f $PRE_START_PATH ] ; then
