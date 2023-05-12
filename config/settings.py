@@ -32,7 +32,7 @@ env = Env()
 # In a production setting change .env.private with .env after initializing all fields in the .env file.
 env.read_env()
 SECRET_KEY = env('SECRET_KEY')
-DEVELOPMENT = env('DEVELOPMENT')
+DEVELOPMENT = env('DEVELOPMENT', default=False)
 
 if DEVELOPMENT:
     DEBUG = True
@@ -41,9 +41,9 @@ if DEVELOPMENT:
 else:
     DEBUG = False
     # SECURITY WARNING: don't run with debug turned on in production!
-    ALLOWED_HOSTS = ['utilities.dide.ira.net']
+    ALLOWED_HOSTS = ['index.dide.ira.net']
     # CSRF_COOKIE_SECURE = False
-    CSRF_TRUSTED_ORIGINS = ['http://utilities.dide.ira.net']
+    CSRF_TRUSTED_ORIGINS = ['http://index.dide.ira.net']
 
 DATABASES = {
         'default': {
