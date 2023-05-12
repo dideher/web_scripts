@@ -84,6 +84,9 @@ celerybeat-schedule
 # dotenv
 .env
 .env.private
+.env.production
+index-docker.sh
+index.conf
 
 # virtualenv
 .venv
