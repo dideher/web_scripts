@@ -30,7 +30,7 @@ print(BASE_DIR)
 # --- gstam ---
 env = Env()
 # In a production setting change .env.private with .env after initializing all fields in the .env file.
-env.read_env()
+env.read_env() #env.read_env(".env.private", recurse=False)
 SECRET_KEY = env('SECRET_KEY')
 DEVELOPMENT = env('DEVELOPMENT', default=False)
 
@@ -52,7 +52,7 @@ DATABASES = {
             'USER': env('MYSQL_USER'),
             'PASSWORD': env('MYSQL_PASSWORD'),
             'HOST': env('MYSQL_HOST'),
-            # 'HOST': env('MYSQL_HOST_IP'),
+            # 'HOST': env('MYSQL_HOST_IP'), # This was commented out in production!!!!
             'PORT': env('MYSQL_PORT'),
         }
  }
@@ -72,10 +72,10 @@ INSTALLED_APPS = [
     # Third Party
     'crispy_forms',
     'crispy_bootstrap5',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
+    #'allauth',
+    #'allauth.account',
+    #'allauth.socialaccount',
+    #'allauth.socialaccount.providers.google',
     'markdownx',
     # Local
     'accounts.apps.AccountsConfig',
@@ -188,15 +188,15 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 # config/settings.py
 
 # django-allauth config
-SITE_ID = 1
+# SITE_ID = 1
 
-ACCOUNT_LOGOUT_REDIRECT = "home"
-AUTHENTICATION_BACKENDS = (
-    # Needed to login by username in Django admin, regardless of `allauth`
-    "django.contrib.auth.backends.ModelBackend",
-    # `allauth` specific authentication methods, such as login by e-mail
-    "allauth.account.auth_backends.AuthenticationBackend", # new
-)
+# ACCOUNT_LOGOUT_REDIRECT = "home"
+# AUTHENTICATION_BACKENDS = (
+#     # Needed to login by username in Django admin, regardless of `allauth`
+#     "django.contrib.auth.backends.ModelBackend",
+#     # `allauth` specific authentication methods, such as login by e-mail
+#     "allauth.account.auth_backends.AuthenticationBackend", # new
+# )
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 DEFAULT_FROM_EMAIL=env('DEFAULT_FROM_EMAIL')
