@@ -4,6 +4,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ## update Debian and install runtime deps
 RUN apt-get update &&\
     apt-get install -y \
+            pkg-config -y \
             python3-pip \
             python3-dev \
             python3-cffi\
