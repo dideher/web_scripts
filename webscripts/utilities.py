@@ -158,8 +158,9 @@ def generate_curriculum_report(uploaded_file):
     new_index = 1
     for e in school_print_order:
         r = [r for r in output if r[1] == e]
-        if r[0][0]:
-            r[0][0] = new_index
-        new_index += 1
-        ws_out.append(r[0])
+        if r:
+            if r[0][0]:
+                r[0][0] = new_index
+            new_index += 1
+            ws_out.append(r[0])
     wb_out.save('/tmp/curriculum_report.xlsx')
